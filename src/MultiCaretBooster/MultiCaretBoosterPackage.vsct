@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!--  This is the file that defines the actual layout and type of the commands.
+        It is divided in different sections (e.g. command definition, command
+        placement, ...), with each defining a specific set of properties.
+        See the comment before each section for more details about how to
+        use it. -->
+
+  <!--  The VSCT compiler (the tool that translates this file into the binary
+        format that VisualStudio will consume) has the ability to run a preprocessor
+        on the vsct file; this preprocessor is (usually) the C++ preprocessor, so
+        it is possible to define includes and macros with the same syntax used
+        in C++ files. Using this ability of the compiler here, we include some files
+        defining some of the constants that we will use inside the file. -->
+
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h" />
+
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h" />
+
+  <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+  <Commands package="guidMultiCaretBoosterPackage">
+    <!-- Inside this section we have different sub-sections: one for the menus, another
+    for the menu groups, one for the buttons (the actual commands), one for the combos
+    and the last one for the bitmaps used. Each element is identified by a command id that
+    is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
+    called "command set" and is used to group different command inside a logically related
+    group; your package should define its own command set in order to avoid collisions
+    with command ids defined by other packages. -->
+
+    <!-- In this section you can define new menu groups. A menu group is a container for
+         other menus or buttons (commands); from a visual point of view you can see the
+         group as the part of a menu contained between two lines. The parent of a group
+         must be a menu. -->
+    <Groups>
+      <Group guid="guidMultiCaretBoosterPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidEditorCommands" id="IDM_MULTI_CARET" />
+      </Group>
+    </Groups>
+
+    <!--Buttons section. -->
+    <!--This section defines the elements the user can interact with, like a menu command or a button
+        or combo box in a toolbar. -->
+    <Buttons>
+      <!--To define a menu group you have to specify its ID, the parent menu and its display priority.
+          The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+          the CommandFlag node.
+          You can add more than one CommandFlag node e.g.:
+              <CommandFlag>DefaultInvisible</CommandFlag>
+              <CommandFlag>DynamicVisibility</CommandFlag>
+          If you do not want an image next to your command, remove the Icon node /> -->
+      <Button guid="guidMultiCaretBoosterPackageCmdSet" id="cmdidSelectionToSequenceCommand" priority="0x0100" type="Button">
+        <Parent guid="guidMultiCaretBoosterPackageCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <CanonicalName>MultiCaretBooster.SelectionToSequence</CanonicalName>
+          <LocCanonicalName>MultiCaretBooster.SelectionToSequence</LocCanonicalName>
+          <CommandName>MultiCaretBooster.SelectionToSequence</CommandName>
+          <ButtonText>Convert to Sequence</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidMultiCaretBoosterPackageCmdSet" id="cmdidInsertNewMultiCaretCommand" priority="0x0100" type="Button">
+        <Parent guid="guidMultiCaretBoosterPackageCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <CanonicalName>MultiCaretBooster.InsertNewMultiCaret</CanonicalName>
+          <LocCanonicalName>MultiCaretBooster.InsertNewMultiCaret</LocCanonicalName>
+          <CommandName>MultiCaretBooster.InsertNewMultiCaret</CommandName>
+          <ButtonText>Insert New Caret on Next Line</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidMultiCaretBoosterPackageCmdSet" id="cmdidRemoveLastMultiCaretCommand" priority="0x0100" type="Button">
+        <Parent guid="guidMultiCaretBoosterPackageCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <CanonicalName>MultiCaretBooster.RemoveLastMultiCaret</CanonicalName>
+          <LocCanonicalName>MultiCaretBooster.RemoveLastMultiCaret</LocCanonicalName>
+          <CommandName>MultiCaretBooster.RemoveLastMultiCaret</CommandName>
+          <ButtonText>Remove Last Caret</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+
+  <KeyBindings>
+    <KeyBinding guid="guidMultiCaretBoosterPackageCmdSet" id="cmdidSelectionToSequenceCommand" mod1="Shift Alt" key1="S" editor="guidVSStd97"/>
+    <KeyBinding guid="guidMultiCaretBoosterPackageCmdSet" id="cmdidInsertNewMultiCaretCommand" mod1="Shift Alt" key1="L" editor="guidVSStd97"/>
+    <KeyBinding guid="guidMultiCaretBoosterPackageCmdSet" id="cmdidRemoveLastMultiCaretCommand" mod1="Shift Alt" key1="K" editor="guidVSStd97"/>
+  </KeyBindings>
+
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidMultiCaretBoosterPackage" value="{af2f0c87-f59e-4eea-ad63-d1a1e495f375}" />
+
+    <GuidSymbol name="guidEditorCommands" value="{160961b3-909d-4b28-9353-a1bef587b4a6}">
+      <IDSymbol name="IDM_MULTI_CARET" value="0x2" />
+    </GuidSymbol>
+
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidMultiCaretBoosterPackageCmdSet" value="{ca6901e6-688f-4a8c-823a-e88c8685b7c0}">
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="cmdidSelectionToSequenceCommand" value="0x0100" />
+      <IDSymbol name="cmdidInsertNewMultiCaretCommand" value="0x0101" />
+      <IDSymbol name="cmdidRemoveLastMultiCaretCommand" value="0x0102" />
+    </GuidSymbol>
+
+  </Symbols>
+</CommandTable>
